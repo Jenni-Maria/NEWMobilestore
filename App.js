@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// App.js
+import * as React from 'react';
+import MobileApp from './MobileApp';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CreateAccount from './screens/CreateAccount';
 
-export default function App() {
+export default function MobileStore() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   <NavigationContainer>
+    <Stack.Navigator initialRouteName="MobileApp">
+      <Stack.Screen
+        name="MobileApp" component={MobileApp} options={{
+          title: 'MobileApp',
+          headerTitle: 'Fruggies',
+        }}
+        />
+        <Stack.Screen
+          name="Create Account" component ={CreateAccount}
+          option={{
+            headerTitle: 'MobileApp name here',
+          }}
+          />
+    </Stack.Navigator>
+   </NavigationContainer> 
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
