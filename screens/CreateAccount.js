@@ -73,12 +73,12 @@ export default function CreateAccount() {
             <Text style={styles.label}>
               Email
             </Text>
-            <TextInput placeholder='Email is your username' value={email} onChange={text => setEmail(text)} style={styles.input} keyboardType='email-address' />
+            <TextInput placeholder='Email is your username' value={email} onChange={String => setEmail(String)} style={styles.input} keyboardType='email-address' />
             
             <Text style={styles.label}>
               Password
             </Text>
-            <TextInput placeholder='Example' value={password} onChange={text => setPassword(text)} style={styles.input} secureTextEntry />
+            <TextInput placeholder='Example' value={password} onChange={String => setPassword(String)} style={styles.input} secureTextEntry />
 
             <Button title='Submit' onPress={save}/>
             </ScrollView>
