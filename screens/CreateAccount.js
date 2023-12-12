@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ScrollView, StyleSheet, Text, TextInput, Button, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
-import { addDoc, collection } from 'firebase/firestore';
+import { ScrollView, StyleSheet, Text, TextInput, Button, KeyboardAvoidingView, SafeAreaView } from 'react-native';
+import { firestrore, addDoc, collection, onSnapshot, query, USERS } from '../firebase/Config';
 
 export default function CreateAccount() {
 
@@ -10,18 +10,16 @@ export default function CreateAccount() {
   const save = async() => {
     const docRef = await addDoc(collection(firestrore, USERS), {
       text: email,
-      text:password,
-      created: serverTimestamp()
+      text: password,
+      //created: serverTimestamp()
     }).catch(error => console.log(error))
     setEmail('')
     setPassword('')
     console.log('New account saved.')
   }
 
-  /*useEffect(() => {
-
-    
-
+  useEffect(() => {
+    const q = query(collection(firestrore,USERS))
     const unsubscribe = onSnapshot(q,(querySnapshot) => {
       const tempUsers =[]
 
@@ -29,16 +27,17 @@ export default function CreateAccount() {
         const usersObject = {
           id: doc.id,
           text: doc.data().text,
-          created: convertFireBaseTimeStampToJS(doc.data().created)
+          //created: convertFireBaseTimeStampToJS(doc.data().created)
         }
         tempUsers.push(usersObject)
       })
-      setUsers(tempUsers)
+      setEmail(tempUsers),
+      setPassword(tempUsers)
     })
     return () => {
       unsubscribe()
     }
-  },[])*/
+  },[])
 
 
   return (
@@ -54,31 +53,15 @@ export default function CreateAccount() {
               Create your account
             </Text>
 
-            {/*<Text style={styles.label}>
-              First name
-            </Text>
-            <TextInput placeholder='Type first name here...' style={styles.input}/>
-
-            <Text style= {styles.label}>
-              Phone
-            </Text>
-            <TextInput placeholder='050 123 4567' style={styles.input}
-            keyboardType='phone-pad' />
-
-            <Text style={styles.label}>
-              Last name
-            </Text>
-            <TextInput placeholder='Type last name here...' style={styles.input}/>*/}
-
             <Text style={styles.label}>
               Email
             </Text>
-            <TextInput placeholder='Email is your username' value={email} onChange={String => setEmail(String)} style={styles.input} keyboardType='email-address' />
+            <TextInput placeholder='Email is your username' onChange={text => setEmail(text)} style={styles.input} keyboardType='email-address' />
             
             <Text style={styles.label}>
               Password
             </Text>
-            <TextInput placeholder='Example' value={password} onChange={String => setPassword(String)} style={styles.input} secureTextEntry />
+            <TextInput placeholder='Example' onChange={text => setPassword(text)} style={styles.input} secureTextEntry />
 
             <Button title='Submit' onPress={save}/>
             </ScrollView>
