@@ -64,6 +64,7 @@ export default function CreateAccount() {
             <TextInput placeholder='Example' onChange={text => setPassword(text)} style={styles.input} secureTextEntry />
 
             <Button title='Submit' onPress={save}/>
+            
             </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>
