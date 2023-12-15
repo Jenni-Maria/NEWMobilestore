@@ -1,8 +1,8 @@
 
 import React, { useLayoutEffect, useState } from "react";
-import { Button, Dimensions, View, useWindowDimensions } from 'react-native';
+import { Button, Dimensions, Pressable, View, useWindowDimensions } from 'react-native';
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, Modal } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 //import { UserAddOutlined } from '@ant-design/icons';
 
@@ -53,8 +53,8 @@ export default function MobileApp({navigation}) {
 
         headerRight: () => (
           //<UserAddOutlined onPress={() => navigation.navigate('Create Account')}/>
-          <Button title="Add account" onPress={() => navigation.navigate('Create Account')}/>
-                
+          <Button title="Create account" onPress={() => navigation.navigate('Create Account')}/>
+
     )
 })
 }, )

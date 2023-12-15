@@ -4,6 +4,8 @@ import MobileApp from './MobileApp';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CreateAccount from './screens/CreateAccount';
+import Modal from './screens/ModalTest';
+import ModalTest from './screens/ModalTest';
 
 export default function MobileStore() {
   const Stack = createNativeStackNavigator();
