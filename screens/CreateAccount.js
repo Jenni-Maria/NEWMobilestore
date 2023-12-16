@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TextInput, Button, KeyboardAvoidingView, SafeAreaView, View } from 'react-native';
 import { firestrore, addDoc, collection, onSnapshot, query, USERS } from '../firebase/Config';
-//Photo by Badulescu Badulescu: https://www.pexels.com/photo/sliced-green-fruits-2171077/
-import { ImageBackground } from 'react-native';
-//import BG from 'BG.js';
-
-const image = 'https://www.pexels.com/photo/sliced-green-fruits-2171077/';
 
 export default function CreateAccount() {
 
@@ -69,7 +64,7 @@ export default function CreateAccount() {
               Password
             </Text>
             <TextInput placeholder='Example' onChangeText={text => setPassword(text)} style={styles.input} secureTextEntry />
-
+  
             <Button title='Submit' onPress={save}/>
             
             </ScrollView>
