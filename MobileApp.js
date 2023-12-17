@@ -71,10 +71,31 @@ const ProductRoute = () => (
 );
 
 const AboutUsRoute = () => (
-  <View style={{ flex: 1, backgroundColor: '#fcfcfc' }}>
-    <Text>About us</Text>
-    <Text>CONTENT WILL BE ADDED HERE DURING PROJECT</Text>
-  </View>
+  <ScrollView style={{ flex: 1, backgroundColor: '#fcfcfc', padding: 16 }}>
+    {/*<Card containerStyle={styles.cardContainer}>
+      <Card.Title style={styles.cardTitle}>About Us</Card.Title>
+      <Card.Divider />
+      <View style={styles.imageContainer}>
+        <Image
+          source={require('./images/homepage/AboutUsFruits.jpg')}
+          style={styles.image}
+          resizeMode="cover"
+        />
+</View>*/}
+      <Text style={styles.aboutText}>
+      {"\n"}{"\n"}   
+      Welcome to FRUGGIES, where our passion for fresh and nutritious produce meets the convenience of modern technology.
+      We are a dedicated team committed to transforming the way you experience and access fruits and vegetables.
+      {"\n"}{"\n"}
+      At FRUGGIES, we understand the importance of healthy eating in today's fast-paced world.
+      Our mission is to bridge the gap between you and the finest, farm-fresh produce.
+      Through our mobile application, we strive to make your journey towards a healthier lifestyle easier and more enjoyable.
+      {"\n"}{"\n"}
+      Thank you for choosing FRUGGIES.
+      Together, let's embrace the goodness of fresh produce and make healthy living a delightful experience.
+      </Text>
+    {/*</Card>*/}
+  </ScrollView>
 );
 
 const ContactRoute = () => (
@@ -198,24 +219,34 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfcfc', 
     }, 
   cardContainer: { 
-    borderRadius: 10, 
-    shadowColor: '#000', 
-    shadowOffset: { width: 0, height: 2 }, 
-    shadowOpacity: 0.3, 
-    shadowRadius: 4, 
-    elevation: 5, 
+    borderRadius: 10,
+      shadowColor: '#6ea133',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 1,
+      shadowRadius: 5,
+      elevation: 5,
     }, 
   cardTitle: { 
-    fontSize: 24, 
-    fontWeight: 'bold', 
+    fontSize: 24,
+      fontWeight: 'bold',
     }, 
   contactText: { 
     fontSize: 16, 
     marginBottom: 8, 
-    }, 
+    },
+  aboutText: {
+    fontSize: 16,
+    marginBottom: 8,
+    },
   pullLeft: { 
     marginLeft: 10, 
-    }, 
-    }); 
+    },
+  image: {
+    width: '100%',
+    height: 250,
+    borderRadius: 10,
+    },
+}); 
+
 
 export default MobileApp;
