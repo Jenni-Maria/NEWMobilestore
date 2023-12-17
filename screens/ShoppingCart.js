@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'; 
 import { View, Text, FlatList, Button } from 'react-native'; 
 import { ShoppingCartContext } from './ShoppingCartContext'; 
-import { useCart } from './ShoppingCartContext';
-
+import { useCart } from './ShoppingCartContext'; 
 const ShoppingCart = ({ children }) => { 
 const { cart, addToCart, removeFromCart, clearCart } = useContext(ShoppingCartContext); 
 const contextValue = useContext(ShoppingCartContext); 
@@ -33,4 +32,4 @@ extraData={cart}
 </View> 
 ); 
 }; 
-export default ShoppingCart; 
+export default ShoppingCart;

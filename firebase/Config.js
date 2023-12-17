@@ -1,6 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import { orderBy, query, onSnapshot, querySnapshot, getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
+import {AsyncStorage} from 'react-native';
+import { ReactNativeAsyncStorage } from 'firebase/auth';
 
 const firebaseConfig = {
 
@@ -14,16 +16,19 @@ const firebaseConfig = {
   
   initializeApp(firebaseConfig);
 
-  const firestrore = getFirestore();
   const firebaseApp = initializeApp(firebaseConfig); 
-  const USERS = 'users';
   const auth = getAuth(firebaseApp); 
 
+  const firestrore = getFirestore();
+  const USERS = 'users';
+  
+
   export {
+    ReactNativeAsyncStorage,
     firebaseApp,
-    firestrore,
     auth,
     signInWithEmailAndPassword,
+    firestrore,
     collection,
     addDoc,
     serverTimestamp,

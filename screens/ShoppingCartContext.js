@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext, useEffect} from 'react';
 
 export const ShoppingCartContext = createContext({}); 
-export const ShoppingCartProvider = ({ children }) => { 
+export const ShoppingCartProvider = ({ children }) => {
+    
 const [cart, setCart] = useState([]); 
 const addToCart = (item) => { 
 console.log('Adding to cart in context:', item); 
