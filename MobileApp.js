@@ -5,22 +5,16 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 import { StyleSheet, Text } from 'react-native';
 import { TabBar } from 'react-native-tab-view';
 import { ScrollView } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
 import OfferBanner from './screens/OfferBanner';
-import { getAuth, onAuthStateChanged} from '@firebase/auth'; 
+import { getAuth, onAuthStateChanged } from '@firebase/auth'; 
 import { useNavigation } from '@react-navigation/native';
 import AboutUsSection from './screens/AboutUsSection';
 import NewInBanner from './screens/NewInBanner';
-//import ShoppingCart from './screens/ShoppingCart';
 import ProductList from './screens/ProductList';
-//import { Card, ListItem} from 'react-native-elements';
+import { Card, Image, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
-import ShoppingCartContext, { ShoppingCartProvider } from './screens/ShoppingCartContext'; 
-
-//import { UserAddOutlined } from '@ant-design/icons';
-
-  const Stack = createNativeStackNavigator(); 
+import { ShoppingCartProvider } from './screens/ShoppingCartContext'; 
+import MyAccountScreen from './screens/MyAccountScreen'
 
   const HomeRoute = ({ route }) => { 
   const navigation = useNavigation(); 
@@ -53,7 +47,8 @@ console.log('Logged out successfully.');
   return ( 
     <ScrollView style={{ flex: 1, backgroundColor: '#fcfcfc', paddingTop: 20, paddingHorizontal: 16 }}> 
       { isAuthenitcated && ( <Button title="Log out" onPress={handleLogout}></Button>)} 
-      { !isAuthenitcated && (<Button title="Log in here" onPress={handleLoginPress}></Button>)} 
+      { !isAuthenitcated && (<Button title="Log in" onPress={handleLoginPress}></Button>)} 
+      <Button title="My Account" onPress={() => navigation.navigate('MyAccountScreen')}></Button>
         <OfferBanner /> 
         <AboutUsSection navigation={navigation} />
         <NewInBanner /> 
@@ -72,7 +67,7 @@ const ProductRoute = () => (
 
 const AboutUsRoute = () => (
   <ScrollView style={{ flex: 1, backgroundColor: '#fcfcfc', padding: 16 }}>
-    {/*<Card containerStyle={styles.cardContainer}>
+    <Card containerStyle={styles.cardContainer}>
       <Card.Title style={styles.cardTitle}>About Us</Card.Title>
       <Card.Divider />
       <View style={styles.imageContainer}>
@@ -81,7 +76,7 @@ const AboutUsRoute = () => (
           style={styles.image}
           resizeMode="cover"
         />
-</View>*/}
+</View>
       <Text style={styles.aboutText}>
       {"\n"}{"\n"}   
       Welcome to FRUGGIES, where our passion for fresh and nutritious produce meets the convenience of modern technology.
@@ -94,13 +89,13 @@ const AboutUsRoute = () => (
       Thank you for choosing FRUGGIES.
       Together, let's embrace the goodness of fresh produce and make healthy living a delightful experience.
       </Text>
-    {/*</Card>*/}
+    </Card>
   </ScrollView>
 );
 
 const ContactRoute = () => (
   <View style={[styles.container, styles.contactContainer]}> 
-    {/*<Card containerStyle={styles.cardContainer}> 
+    <Card containerStyle={styles.cardContainer}> 
     <Card.Title style={styles.cardTitle}>Contact Us</Card.Title> 
 <Card.Divider /> 
     <Text style={styles.contactText}> 
@@ -120,9 +115,19 @@ const ContactRoute = () => (
           <ListItem.Subtitle style={styles.pullLeft}>+1 (123) 456-7890</ListItem.Subtitle> 
         </ListItem.Content> 
       </ListItem> 
-   </Card>  */}
+   </Card>
   </View> 
-); 
+);
+
+const MyAccountRoute = () => (
+
+  <View style={{ flex: 1, backgroundColor: '#fcfcfc' }}>
+  
+  <MyAccountScreen />
+  
+  </View>
+  
+  );
 
 
 const renderScene = SceneMap({
@@ -130,6 +135,7 @@ const renderScene = SceneMap({
   product: ProductRoute,
   about: AboutUsRoute,
   contact: ContactRoute,
+  account: MyAccountRoute,
 });
 
 const renderTabBar = (props) => (
@@ -143,7 +149,9 @@ const MobileApp = ({ navigation }) => {
     navigation.setOptions({
 
         headerRight: () => (
+          
           //<UserAddOutlined onPress={() => navigation.navigate('Create Account')}/>
+
           <Button title="Create account"
           onPress={() =>
           navigation.navigate('Create Account')}/>
@@ -158,6 +166,7 @@ const MobileApp = ({ navigation }) => {
     { key: 'product', title: 'Product' },
     { key: 'about', title: 'About us' },
     { key: 'contact', title: 'Contact' },
+    { key: 'account', title: 'MyAccount'}
   ]);
 
   return (
@@ -178,7 +187,9 @@ const MobileApp = ({ navigation }) => {
               case 'about': 
               return <AboutUsRoute />; 
               case 'contact': 
-              return <ContactRoute />; 
+              return <ContactRoute />;
+              case 'account':
+              return <MyAccountRoute />;
               
               default: 
               return null; 

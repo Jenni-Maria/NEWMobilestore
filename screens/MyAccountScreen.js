@@ -1,34 +1,30 @@
 import React, { useState } from 'react';
 
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
 
-import { auth } from './firebase'; // Import your Firebase configuration
-
-import { useRoute } from '@react-navigation/native';
+import { getAuth, updatePassword } from 'firebase/auth';
 
 const MyAccountScreen = () => {
 
-const route = useRoute();
-
-const { userEmail } = route.params || {};
+const auth = getAuth();
 
 const [newPassword, setNewPassword] = useState('');
-
-const [changePasswordMessage, setChangePasswordMessage] = useState({ message: '', color: 'black' });
 
 const handleChangePassword = async () => {
 
 try {
 
-const user = auth.currentUser;
+await updatePassword(auth.currentUser, newPassword);
 
-await user.updatePassword(newPassword);
+console.log('Password updated successfully');
 
-setChangePasswordMessage({ message: 'Password changed successfully!', color: 'green' });
+Alert.alert('Success', 'Password updated successfully!');
 
 } catch (error) {
 
-setChangePasswordMessage({ message: 'Failed to change password. ' + error.message, color: 'red' });
+console.error('Error updating password:', error.message);
+
+Alert.alert('Error', 'Failed to update password. Please try again.');
 
 }
 
@@ -38,33 +34,57 @@ return (
 
 <View style={styles.container}>
 
-<Text style={styles.title}>Change Password</Text>
+<View style={styles.titleBox}>
 
-{userEmail && <Text style={styles.emailText}>Email: {userEmail}</Text>}
+<Text style={styles.title}>My Account</Text>
 
-{/* Password change section */}
+</View>
+
+{auth.currentUser ? (
+
+<>
+
+<View style={styles.emailBox}>
+
+<Text style={styles.emailLabel}>Email:</Text>
+
+<Text style={styles.emailText}>{auth.currentUser.email}</Text>
+
+</View>
+
+<View style={styles.changePasswordBox}>
+
+<Text style={styles.changePasswordTitle}>Change Password</Text>
 
 <TextInput
 
-placeholder="Enter New Password"
+style={styles.input}
 
-value={newPassword}
-
-onChangeText={(text) => setNewPassword(text)}
+placeholder="New Password"
 
 secureTextEntry
 
-style={styles.input}
+value={newPassword}
+
+onChangeText={text => setNewPassword(text)}
 
 />
 
 <Button title="Change Password" onPress={handleChangePassword} />
 
-<Text style={[styles.message, { color: changePasswordMessage.color }]}>
+</View>
 
-{changePasswordMessage.message}
+</>
+
+) : (
+
+<Text style={styles.signInMessage}>
+
+Please sign in or create an account to access this feature.
 
 </Text>
+
+)}
 
 </View>
 
@@ -78,7 +98,7 @@ container: {
 
 flex: 1,
 
-justifyContent: 'center',
+justifyContent: 'flex-start',
 
 alignItems: 'center',
 
@@ -86,17 +106,75 @@ padding: 16,
 
 },
 
-title: {
+titleBox: {
 
-fontSize: 24,
+backgroundColor: '#6ea133',
+
+padding: 16,
+
+borderRadius: 10,
 
 marginBottom: 16,
 
 },
 
+title: {
+
+fontSize: 24,
+
+fontWeight: 'bold',
+
+color: '#fff',
+
+},
+
+emailBox: {
+
+backgroundColor: '#e0e0e0',
+
+padding: 16,
+
+borderRadius: 10,
+
+marginBottom: 16,
+
+width: '100%',
+
+},
+
+emailLabel: {
+
+fontSize: 16,
+
+fontWeight: 'bold',
+
+},
+
 emailText: {
 
-fontSize: 18,
+fontSize: 16,
+
+},
+
+changePasswordBox: {
+
+backgroundColor: '#e0e0e0',
+
+padding: 16,
+
+borderRadius: 10,
+
+marginBottom: 16,
+
+width: '100%',
+
+},
+
+changePasswordTitle: {
+
+fontSize: 20,
+
+fontWeight: 'bold',
 
 marginBottom: 8,
 
@@ -118,12 +196,16 @@ width: '100%',
 
 },
 
-message: {
+signInMessage: {
 
-marginTop: 16,
+marginTop: 20,
+
+fontSize: 16,
+
+textAlign: 'center',
 
 },
 
 });
 
-export default MyAccountScreen;
+export default MyAccountScreen

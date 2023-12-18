@@ -1,21 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
-//import { Card } from 'react-native-elements';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { Card, Image } from 'react-native-elements';
 
 
 
 const AboutUsScreen = () => (
     <ScrollView style={{ flex: 1, backgroundColor: '#fcfcfc', padding: 16 }}>
-      {/*<Card containerStyle={styles.cardContainer}>
+      <Card containerStyle={styles.cardContainer}>
         <Card.Title style={styles.cardTitle}>About Us</Card.Title>
         <Card.Divider />
         <View style={styles.imageContainer}>
           <Image
-            source={require('./images/homepage/AboutUsFruits.jpg')}
+            source={require('../images/homepage/AboutUsFruits.jpg')}
             style={styles.image}
             resizeMode="cover"
 />
-        </View>*/}
+        </View>
         <Text style={styles.aboutText}>
         {"\n"}{"\n"}   
         Welcome to FRUGGIES, where our passion for fresh and nutritious produce meets the convenience of modern technology.
@@ -29,7 +29,7 @@ const AboutUsScreen = () => (
         Together, let's embrace the goodness of fresh produce and make healthy living a delightful experience.
         </Text>
         {/* Add more content as needed */}
-      {/*</Card>*/}
+      </Card>
     </ScrollView>
   );
  
