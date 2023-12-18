@@ -1,8 +1,8 @@
 import { initializeApp } from 'firebase/app'
 import { orderBy, query, onSnapshot, querySnapshot, getFirestore, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; 
+import {AsyncStorage} from 'react-native';
 import { ReactNativeAsyncStorage } from 'firebase/auth';
-//import {AsyncStorage} from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
 
@@ -24,7 +24,6 @@ const firebaseConfig = {
   
 
   export {
-    //AsyncStorage,
     ReactNativeAsyncStorage,
     firebaseApp,
     auth,

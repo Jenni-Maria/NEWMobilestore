@@ -7,7 +7,6 @@ import AboutUsScreen from './screens/AboutUsScreen';
 import LoginScreen from './screens/LoginScreen';
 import ShoppingCart from './screens/ShoppingCart';
 import { ShoppingCartProvider } from './screens/ShoppingCartContext';
-import MyAccountScreen from './screens/MyAccountScreen';
 
 export default function App() {
 
@@ -60,13 +59,6 @@ export default function App() {
             title: 'Shopping Cart', 
             headerTitle: 'Shopping Cart', 
             }} 
-          />
-        <Stack.Screen
-          component={MyAccountScreen}
-          options={{
-            title: 'My Account',
-            headerTitle: 'My Account',
-            }}
           />
     </Stack.Navigator>
    </NavigationContainer>

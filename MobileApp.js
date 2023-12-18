@@ -14,7 +14,6 @@ import ProductList from './screens/ProductList';
 import { Card, Image, ListItem} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { ShoppingCartProvider } from './screens/ShoppingCartContext'; 
-import MyAccountScreen from './screens/MyAccountScreen'
 
   const HomeRoute = ({ route }) => { 
   const navigation = useNavigation(); 
@@ -48,7 +47,6 @@ console.log('Logged out successfully.');
     <ScrollView style={{ flex: 1, backgroundColor: '#fcfcfc', paddingTop: 20, paddingHorizontal: 16 }}> 
       { isAuthenitcated && ( <Button title="Log out" onPress={handleLogout}></Button>)} 
       { !isAuthenitcated && (<Button title="Log in" onPress={handleLoginPress}></Button>)} 
-      <Button title="My Account" onPress={() => navigation.navigate('MyAccountScreen')}></Button>
         <OfferBanner /> 
         <AboutUsSection navigation={navigation} />
         <NewInBanner /> 
@@ -117,17 +115,7 @@ const ContactRoute = () => (
       </ListItem> 
    </Card>
   </View> 
-);
-
-const MyAccountRoute = () => (
-
-  <View style={{ flex: 1, backgroundColor: '#fcfcfc' }}>
-  
-  <MyAccountScreen />
-  
-  </View>
-  
-  );
+); 
 
 
 const renderScene = SceneMap({
@@ -135,7 +123,6 @@ const renderScene = SceneMap({
   product: ProductRoute,
   about: AboutUsRoute,
   contact: ContactRoute,
-  account: MyAccountRoute,
 });
 
 const renderTabBar = (props) => (
@@ -166,7 +153,6 @@ const MobileApp = ({ navigation }) => {
     { key: 'product', title: 'Product' },
     { key: 'about', title: 'About us' },
     { key: 'contact', title: 'Contact' },
-    { key: 'account', title: 'MyAccount'}
   ]);
 
   return (
@@ -187,9 +173,7 @@ const MobileApp = ({ navigation }) => {
               case 'about': 
               return <AboutUsRoute />; 
               case 'contact': 
-              return <ContactRoute />;
-              case 'account':
-              return <MyAccountRoute />;
+              return <ContactRoute />; 
               
               default: 
               return null; 
